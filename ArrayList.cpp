@@ -14,6 +14,8 @@ public:
   void remove(T);
   void removeAllOf(T);
   void removeAt(int);
+  int search(T);
+  int rsearch(T);
   T at(int);
   void clear();
   void printArray();
@@ -142,6 +144,24 @@ void ArrayList<T>::removeAt(int pos) {
   }
   length--;
   if (size() <= capacity/2) shrink();
+}
+
+template <class T>
+int ArrayList<T>::search(T value) {
+  int len = size();
+  for (int i=0; i<len; ++i) {
+    if (arr[i] == value) return i;
+  }
+  return -1;
+}
+
+template <class T>
+int ArrayList<T>::rsearch(T value) {
+  int len = size();
+  for (int i=len-1; i>=0; --i) {
+    if (arr[i] == value) return i;
+  }
+  return -1;
 }
 
 template <class T>
