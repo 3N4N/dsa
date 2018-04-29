@@ -1,5 +1,7 @@
 #include <iostream>
 
+#define NULL_VALUE -99999
+
 template <class T>
 class Stack
 {
@@ -45,5 +47,7 @@ void Stack<T>::pop() {
 
 template <class T>
 T Stack<T>::peek() {
+  if (size() <= 0)
+    return NULL_VALUE;
   return arr[top];
 }
