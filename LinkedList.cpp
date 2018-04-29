@@ -1,0 +1,125 @@
+#include <iostream>
+
+template <class T>
+class Node
+{
+public:
+  Node (T value) {
+    this->value = value;
+    next = NULL;
+  }
+  virtual ~Node () {
+  }
+  void setNext(Node<T> * next) {
+    this->next = next;
+  }
+  void setValue(T value) {
+    this-> value = value;
+  }
+  Node<T> * getNext() {
+    return next;
+  }
+  T getValue() {
+    return value;
+  }
+
+private:
+  T value;
+  Node<T> * next;
+};
+
+template <class T>
+class LinkedList
+{
+public:
+  LinkedList (T);
+  virtual ~LinkedList ();
+  void add(T);
+  void insertFirst(T);
+  void remove(T);
+  void removeAllOf(T);
+  void printList();
+
+private:
+  Node<T> * root;
+};
+
+template <class T>
+LinkedList<T>::LinkedList(T value) {
+  root = new Node<T>(value);
+}
+
+template <class T>
+LinkedList<T>::~LinkedList() {
+}
+
+template <class T>
+void LinkedList<T>::add(T value) {
+  Node<T> * currentNode = root;
+  Node<T> * tmpNode = new Node<T>(value);
+
+  while (currentNode->getNext() != NULL)
+    currentNode = currentNode->getNext();
+  currentNode->setNext(tmpNode);
+}
+
+template <class T>
+void LinkedList<T>::insertFirst(T value) {
+  Node<T> * tmpNode = new Node<T>(value);
+  tmpNode->setNext(root);
+  root = tmpNode;
+}
+
+template <class T>
+void LinkedList<T>::remove(T value) {
+  if (root->getValue() == value) {
+    root = root->getNext();
+    return ;
+  }
+  Node<T> * currentNode = root;
+  Node<T> * previousNode = NULL;
+  while ( (currentNode->getValue() != value) && (currentNode->getNext() != NULL) ) {
+    previousNode = currentNode;
+    currentNode = currentNode->getNext();
+  }
+
+  if (currentNode->getValue() == value) {
+    currentNode = currentNode->getNext();
+    previousNode->setNext(currentNode);
+  }
+}
+
+template <class T>
+void LinkedList<T>::removeAllOf(T value) {
+  if (root->getValue() == value) {
+    root = root->getNext();
+  }
+
+  Node<T> * currentNode = root;
+  Node<T> * previousNode = NULL;
+
+  bool flag=true;
+  while (flag) {
+  while ( (currentNode->getValue() != value) && (currentNode->getNext() != NULL) ) {
+    previousNode = currentNode;
+    currentNode = currentNode->getNext();
+  }
+
+  if (currentNode->getValue() == value) {
+    currentNode = currentNode->getNext();
+    previousNode->setNext(currentNode);
+  } else if (currentNode->getNext() == NULL)
+    return ;
+  }
+}
+
+template <class T>
+void LinkedList<T>::printList() {
+  int i=1;
+  Node<T> * currentNode = root;
+  std::cout << i++ << ": " << currentNode->getValue() << std::endl;
+  while (currentNode->getNext() != NULL) {
+    currentNode = currentNode->getNext();
+    std::cout << i++ << ": " << currentNode->getValue() << std::endl;
+  }
+}
