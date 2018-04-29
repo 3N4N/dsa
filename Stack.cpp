@@ -36,6 +36,10 @@ void Stack<T>::push(T value) {
 
 template <class T>
 void Stack<T>::pop() {
+  if (size() <= 0) {
+    std::cout << "Stack is empty." << std::endl;
+    return ;
+  }
   top--;
 }
 
