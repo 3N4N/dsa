@@ -6,19 +6,19 @@ template <class T>
 class ArrayList
 {
 public:
-  ArrayList (int);
-  virtual ~ArrayList ();
-  int size();
-  void add(T);
-  void insertAt(int, T);
-  void remove(T);
-  void removeAllOf(T);
-  void removeAt(int);
-  int search(T);
-  int rsearch(T);
-  T at(int);
-  void clear();
-  void printArray();
+  ArrayList (int);        // create arraylist with given capacity
+  virtual ~ArrayList ();  // delete arraylist and release memory
+  int size();             // return current size
+  void add(T);            // insert item at the end
+  void insertAt(int, T);  // insert item at given position
+  void remove(T);         // remove first occurrence of given item
+  void removeAllOf(T);    // remove all occurrence of given item
+  void removeAt(int);     // remove item at given position
+  int search(T);          // return index of first occurrence of given item
+  int rsearch(T);         // backward search
+  T at(int);              // return item at given position
+  void clear();           // remove all items
+  void printArray();      // print the items in the arraylist
 
 private:
   void expand();

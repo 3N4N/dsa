@@ -7,12 +7,12 @@ template <class T>
 class Queue
 {
 public:
-  Queue (int);
-  void enqueue(T);
-  void dequeue(T);
-  T first();
-  T last();
-  int size();
+  Queue (int);      // create queue with given capacity
+  void enqueue(T);  // push item at the last
+  void dequeue(T);  // pop item from the beginning
+  T first();        // return item at the beginning
+  T last();         // return item at the end
+  int size();       // return the size
 
 private:
   T * arr;

@@ -6,10 +6,10 @@ template <class T>
 class Stack
 {
 public:
-  Stack (int);
-  void push(T);
-  void pop();
-  T peek();
+  Stack (int);   // create a stack with given capacity
+  void push(T);  // push at the end
+  void pop();    // pop from the end
+  T peek();      // return the last item
   int size() { return top+1; }
 
 private:

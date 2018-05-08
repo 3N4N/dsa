@@ -32,13 +32,13 @@ template <class T>
 class LinkedList
 {
 public:
-  LinkedList (T);
-  virtual ~LinkedList ();
-  void add(T);
-  void insertFirst(T);
-  void remove(T);
-  void removeAllOf(T);
-  void printList();
+  LinkedList (T);          // create a singly linked list
+  virtual ~LinkedList ();  // delete list and release memory
+  void add(T);             // add item at the last
+  void insertFirst(T);     // add item at the beginning
+  void remove(T);          // remove first occurrence of item
+  void removeAllOf(T);     // remove all occurrence of item
+  void printList();        // print the items of the list
 
 private:
   Node<T> * root;
