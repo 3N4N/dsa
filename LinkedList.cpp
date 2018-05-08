@@ -32,7 +32,8 @@ template <class T>
 class LinkedList
 {
 public:
-  LinkedList (T);          // create a singly linked list
+  LinkedList ();           // create a singly linked list
+  LinkedList (T);          // create a singly linked list and add item
   virtual ~LinkedList ();  // delete list and release memory
   void add(T);             // add item at the last
   void insertFirst(T);     // add item at the beginning
@@ -43,6 +44,11 @@ public:
 private:
   Node<T> * root;
 };
+
+template <class T>
+LinkedList<T>::LinkedList() {
+  root = NULL;
+}
 
 template <class T>
 LinkedList<T>::LinkedList(T value) {
