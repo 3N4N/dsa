@@ -61,9 +61,13 @@ LinkedList<T>::~LinkedList() {
 
 template <class T>
 void LinkedList<T>::add(T value) {
-  Node<T> * currentNode = root;
   Node<T> * tmpNode = new Node<T>(value);
+  if (root==NULL) {
+    root = tmpNode;
+    return ;
+  }
 
+  Node<T> * currentNode = root;
   while (currentNode->getNext() != NULL)
     currentNode = currentNode->getNext();
   currentNode->setNext(tmpNode);
