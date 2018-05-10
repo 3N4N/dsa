@@ -104,6 +104,10 @@ void LinkedList<T>::remove(T value) {
 template <class T>
 void LinkedList<T>::removeAllOf(T value) {
   if (root==NULL) return ;
+  if (root->getNext()==NULL) {
+    remove(value);
+    return ;
+  }
   // Remove all the nodes with matching value from the beginning
   while (root->getValue() == value) {
     root = root->getNext();
@@ -130,7 +134,6 @@ void LinkedList<T>::printList() {
     std::cout << "List is empty" << std::endl;
     return ;
   }
-  int i=1;
   Node<T> * currentNode = root;
   std::cout << currentNode->getValue() << " ";
   while (currentNode->getNext() != NULL) {
