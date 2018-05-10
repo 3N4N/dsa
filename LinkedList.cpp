@@ -126,6 +126,7 @@ template <class T>
 void LinkedList<T>::printList() {
   if (root==NULL) {
     std::cout << "List is empty" << std::endl;
+    return ;
   }
   int i=1;
   Node<T> * currentNode = root;
