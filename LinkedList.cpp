@@ -88,7 +88,8 @@ void LinkedList<T>::remove(T value) {
   }
   Node<T> * currentNode = root;
   Node<T> * previousNode = NULL;
-  while ( (currentNode->getValue() != value) && (currentNode->getNext() != NULL) ) {
+  while (currentNode->getValue() != value
+      && currentNode->getNext() != NULL) {
     previousNode = currentNode;
     currentNode = currentNode->getNext();
   }
