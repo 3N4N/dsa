@@ -91,7 +91,7 @@ void ArrayList<T>::add(T value) {
 
 template <class T>
 void ArrayList<T>::insertAt(int pos, T value) {
-  if (pos < 0) return ;
+  if (pos < 0 || pos > size()) return ;
 
   if (size() >= capacity)
     expand();
@@ -136,7 +136,7 @@ void ArrayList<T>::removeAllOf(T value) {
 
 template <class T>
 void ArrayList<T>::removeAt(int pos) {
-  if (pos < 0) return ;
+  if ( pos < 0 || pos >= size() ) return ;
 
   int len = size();
   for (int i=pos; i<len; ++i) {
@@ -166,7 +166,8 @@ int ArrayList<T>::rsearch(T value) {
 
 template <class T>
 T ArrayList<T>::at(int pos) {
-  if (pos < 0) return NULL_VALUE;
+  if ( pos < 0 || pos >= size() )
+    return NULL_VALUE;
   return arr[pos];
 }
 
