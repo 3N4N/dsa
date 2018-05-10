@@ -102,25 +102,23 @@ void LinkedList<T>::remove(T value) {
 
 template <class T>
 void LinkedList<T>::removeAllOf(T value) {
-  if (root->getValue() == value) {
+  // Remove all the nodes with matching value from the beginning
+  while (root->getValue() == value) {
     root = root->getNext();
   }
 
   Node<T> * currentNode = root;
   Node<T> * previousNode = NULL;
 
-  bool flag=true;
-  while (flag) {
-  while ( (currentNode->getValue() != value) && (currentNode->getNext() != NULL) ) {
+  // traverse list and remove matching nodes until hit end
+  while (currentNode->getNext()!=NULL) {
     previousNode = currentNode;
     currentNode = currentNode->getNext();
-  }
 
-  if (currentNode->getValue() == value) {
-    currentNode = currentNode->getNext();
-    previousNode->setNext(currentNode);
-  } else if (currentNode->getNext() == NULL)
-    return ;
+    if (currentNode->getValue()==value) {
+      previousNode->setNext(currentNode->getNext());
+      currentNode = previousNode;
+    }
   }
 }
 
