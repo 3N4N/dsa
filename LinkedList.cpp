@@ -82,6 +82,7 @@ void LinkedList<T>::insertFirst(T value) {
 
 template <class T>
 void LinkedList<T>::remove(T value) {
+  if (root==NULL) return ;
   if (root->getValue() == value) {
     root = root->getNext();
     return ;
@@ -102,6 +103,7 @@ void LinkedList<T>::remove(T value) {
 
 template <class T>
 void LinkedList<T>::removeAllOf(T value) {
+  if (root==NULL) return ;
   // Remove all the nodes with matching value from the beginning
   while (root->getValue() == value) {
     root = root->getNext();
