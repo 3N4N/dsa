@@ -9,6 +9,7 @@ This repo contains sample data structure implementations for my CSE course.
 ## Implemented
 
   - ArrayList
-  - Linked list
+  - Singly Linked list
+  - Doubly Linked list
   - Stack
   - Queue
