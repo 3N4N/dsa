@@ -124,11 +124,15 @@ void LinkedList<T>::removeAllOf(T value) {
 
 template <class T>
 void LinkedList<T>::printList() {
+  if (root==NULL) {
+    std::cout << "List is empty" << std::endl;
+  }
   int i=1;
   Node<T> * currentNode = root;
-  std::cout << i++ << ": " << currentNode->getValue() << std::endl;
+  std::cout << currentNode->getValue() << " ";
   while (currentNode->getNext() != NULL) {
     currentNode = currentNode->getNext();
-    std::cout << i++ << ": " << currentNode->getValue() << std::endl;
+    std::cout << currentNode->getValue() << " ";
   }
+  std::cout << std::endl;
 }

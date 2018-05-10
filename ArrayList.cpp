@@ -180,7 +180,12 @@ void ArrayList<T>::clear() {
 template <class T>
 void ArrayList<T>::printArray() {
   int len = size();
-  for (int i=0; i<len; ++i) {
-    std::cout << i+1 << ": " << arr[i] << std::endl;
+  if (len==0) {
+    std::cout << "Arraylist is empty" << std::endl;
+    return ;
   }
+  for (int i=0; i<len-1; ++i) {
+    std::cout << arr[i] << " ";
+  }
+  std::cout << arr[len-1] << std::endl;
 }
