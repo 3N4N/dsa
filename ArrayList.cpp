@@ -1,6 +1,8 @@
 #include <iostream>
 
+#ifndef NULL_VALUE
 #define NULL_VALUE -99999
+#endif
 
 template <class T>
 class ArrayList
