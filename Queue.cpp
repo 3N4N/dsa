@@ -8,6 +8,7 @@ class Queue
 {
 public:
   Queue (int);      // create queue with given capacity
+  ~Queue();
   void enqueue(T);  // push item at the last
   void dequeue();  // pop item from the beginning
   T first();        // return item at the beginning
@@ -29,6 +30,12 @@ Queue<T>::Queue(int capacity) {
   tail = -1;
   length = 0;
   arr = new T[capacity];
+}
+
+template <class T>
+Queue<T>::~Queue() {
+  if (arr) delete[] arr;
+  arr = NULL;
 }
 
 template <class T>
