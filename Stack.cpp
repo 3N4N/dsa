@@ -7,6 +7,7 @@ class Stack
 {
 public:
   Stack (int);   // create a stack with given capacity
+  ~Stack();
   void push(T);  // push at the end
   void pop();    // pop from the end
   T peek();      // return the last item
@@ -23,6 +24,12 @@ Stack<T>::Stack(int capacity) {
   this->capacity = capacity;
   top = -1;
   arr = new T[capacity];
+}
+
+template <class T>
+Stack<T>::~Stack() {
+  if (arr) delete[] arr;
+  arr = NULL;
 }
 
 template <class T>
