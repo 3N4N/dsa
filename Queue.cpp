@@ -19,6 +19,7 @@ private:
   int capacity;
   int head;
   int tail;
+  int length;
 };
 
 template <class T>
@@ -26,6 +27,8 @@ Queue<T>::Queue(int capacity) {
   this->capacity = capacity;
   head = 0;
   tail = -1;
+  length = 0;
+  arr = new T[capacity];
 }
 
 template <class T>
@@ -37,6 +40,7 @@ void Queue<T>::enqueue(T value) {
 
   tail = ( tail + 1 ) % capacity;
   arr[tail] = value;
+  length++;
 }
 
 template <class T>
@@ -47,6 +51,7 @@ void Queue<T>::dequeue() {
   }
 
   head = ( head + 1 ) % capacity;
+  length--;
 }
 
 template <class T>
@@ -63,6 +68,5 @@ T Queue<T>::last() {
 
 template <class T>
 int Queue<T>::size() {
-  if (tail==-1) return 0;
-  return std::abs( head - tail ) + 1;
+  return length;
 }
