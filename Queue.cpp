@@ -9,7 +9,7 @@ class Queue
 public:
   Queue (int);      // create queue with given capacity
   void enqueue(T);  // push item at the last
-  void dequeue(T);  // pop item from the beginning
+  void dequeue();  // pop item from the beginning
   T first();        // return item at the beginning
   T last();         // return item at the end
   int size();       // return the size
@@ -40,7 +40,7 @@ void Queue<T>::enqueue(T value) {
 }
 
 template <class T>
-void Queue<T>::dequeue(T value) {
+void Queue<T>::dequeue() {
   if (size() <= 0) {
     std::cout << "Queue is empty." << std::endl;
     return ;
