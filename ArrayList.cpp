@@ -8,6 +8,7 @@ template <class T>
 class ArrayList
 {
 public:
+  ArrayList ();           // default constructor with capacity 2
   ArrayList (int);        // create arraylist with given capacity
   virtual ~ArrayList ();  // delete arraylist and release memory
   int size();             // return current size
@@ -29,6 +30,13 @@ private:
   int length;
   int capacity;
 };
+
+template <class T>
+ArrayList<T>::ArrayList() {
+  this->capacity = 2;
+  arr = new T[ capacity ];
+  length=0;
+}
 
 template <class T>
 ArrayList<T>::ArrayList(int capacity) {
