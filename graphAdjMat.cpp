@@ -2,14 +2,6 @@
 #include "Stack.cpp"
 #include "Queue.cpp"
 
-#ifndef NULL_VALUE
-#define NULL_VALUE -999999
-#endif
-
-#ifndef INFINITY
-#define INFINITY 999999
-#endif
-
 class Graph {
 public:
   Graph(bool, int, int);
