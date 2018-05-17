@@ -15,6 +15,7 @@ public:
 private:
   bool isDirected;
   int ** adjMat;
+  bool * visited;
   int noOfVertices;
   int noOfEdges;
 };
@@ -23,6 +24,7 @@ Graph::Graph(bool isDirected, int noOfVertices, int noOfEdges) {
   this->isDirected = isDirected;
   this->noOfVertices = noOfVertices;
   this->noOfEdges = noOfEdges;
+  visited = new bool[noOfVertices];
   adjMat = new int * [noOfVertices];
   for (int i=0; i<noOfVertices; i++) {
     adjMat[i] = new int[noOfVertices];
@@ -79,8 +81,6 @@ int Graph::getDegree(int u) {
 void Graph::dfs(int source) {
   if (source <0 || source >= noOfVertices) return;
 
-  bool * visited = new bool[noOfVertices];
-  bool * adjVertex = new bool[noOfVertices];
   for (int i=0; i<noOfVertices; ++i)
     visited[i] = false;
 
@@ -93,17 +93,9 @@ void Graph::dfs(int source) {
     visited[source] = true;
     std::cout << source << " " ;
 
-    int noOfAdjVertices = 0;
     for (int i=0; i<noOfVertices; ++i) {
-      if (isEdge(source, i)) {
-        noOfAdjVertices++;
-        adjVertex[i] = true;
-      } else
-        adjVertex[i] = false;
-    }
-
-    for (int i=0; i<noOfVertices; ++i) {
-      if (!adjVertex[i]) continue;
+      if (!isEdge(source, i))
+        continue;
       else if (!visited[i]) {
         st.push(i);
       }
@@ -115,8 +107,6 @@ void Graph::dfs(int source) {
 void Graph::bfs(int source) {
   if (source <0 || source >= noOfVertices) return;
 
-  bool * adjVertex = new bool[noOfVertices];
-  bool * visited = new bool[noOfVertices];
   for (int i=0; i<noOfVertices; ++i) {
     visited[i] = false;
   }
@@ -130,16 +120,8 @@ void Graph::bfs(int source) {
     source = q.first();
     q.dequeue();
 
-    int noOfAdjVertices = 0;
     for (int i=0; i<noOfVertices; ++i) {
-      if (isEdge(source, i)) {
-        noOfAdjVertices++;
-        adjVertex[i] = true;
-      } else
-        adjVertex[i] = false;
-    }
-    for (int i=0; i<noOfVertices; ++i) {
-      if (!adjVertex[i]) continue;
+      if (!isEdge(source, i)) continue;
       else if (!visited[i]) {
         q.enqueue(i);
         visited[i] = true;
