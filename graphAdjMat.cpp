@@ -57,6 +57,25 @@ void Graph::removeEdge(int u, int v)
   if (!isDirected) adjMat[v][u] = 0;
 }
 
+int Graph::getDegree(int u) {
+  int counter = 0;
+  for (int i=0; i<noOfVertices; ++i) {
+    if (i==u) {
+      if (adjMat[u][i]) counter++;
+      continue;
+    }
+
+    if (isDirected) {
+      if (adjMat[u][i]) counter++;
+      if (adjMat[i][u]) counter++;
+    } else {
+      if (adjMat[u][i]) counter++;
+    }
+  }
+
+  return counter;
+}
+
 void Graph::dfs(int source) {
   if (source <0 || source >= noOfVertices) return;
 
