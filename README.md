@@ -4,7 +4,6 @@ This repo contains sample data structure implementations for my CSE course.
 
 ## To be implemented
 
-  - Graph
 
 ## Implemented
 
@@ -13,3 +12,4 @@ This repo contains sample data structure implementations for my CSE course.
   - Doubly Linked list
   - Stack
   - Queue
+  - Graph

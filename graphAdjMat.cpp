@@ -7,9 +7,12 @@ public:
   Graph(bool, int, int);
   ~Graph();
   bool isEdge(int, int);
-  void addEdge(int u, int v);
-  void removeEdge(int u, int v);
-  int getDegree(int u);
+  void addEdge(int, int, int);
+  void removeEdge(int, int);
+  int getDegree(int);
+  int getNoOfVertices();
+  int getNoOfEdges();
+  int getEdgeWeight(int, int);
   void dfs(int);
   void bfs(int);
 private:
@@ -45,11 +48,11 @@ bool Graph::isEdge(int u, int v) {
   return adjMat[u][v];
 }
 
-void Graph::addEdge(int u, int v)
+void Graph::addEdge(int u, int v, int w)
 {
   if(u<0 || u>=noOfVertices || v<0 || v>=noOfVertices) return;
-  adjMat[u][v] = 1;
-  if(!isDirected) adjMat[v][u] = 1;
+  adjMat[u][v] = w;
+  if(!isDirected) adjMat[v][u] = w;
 }
 
 void Graph::removeEdge(int u, int v)
@@ -76,6 +79,17 @@ int Graph::getDegree(int u) {
   }
 
   return counter;
+}
+
+int Graph::getNoOfVertices() {
+    return noOfVertices;
+}
+int Graph::getNoOfEdges() {
+    return noOfEdges;
+}
+
+int Graph::getEdgeWeight(int u, int v) {
+    return adjMat[u][v];
 }
 
 void Graph::dfs(int source) {
