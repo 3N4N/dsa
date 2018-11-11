@@ -1,6 +1,8 @@
-#include <iostream>
+#ifndef PRIORITY_QUEUE_H
+#define PRIORITY_QUEUE_H
 
-using namespace std;
+
+#include <iostream>
 
 #define NULL_VALUE -99999
 
@@ -78,7 +80,7 @@ T Priority_Queue<T>::dequeue() {
     Node<T> *tmp;
     T ret;
     if(front == NULL)
-        cout << "Queue Underflow\n";
+        std::cout << "Queue Underflow\n";
     else
     {
         tmp = front;
@@ -106,3 +108,5 @@ bool Priority_Queue<T>::isInQueue(T item) {
     }
     return false;
 }
+
+#endif          // PRIORITY_QUEUE_H
