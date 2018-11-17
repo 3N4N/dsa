@@ -39,6 +39,7 @@ public:
     LinkedList ();           // create a singly linked list
     LinkedList (T);          // create a singly linked list and add item
     virtual ~LinkedList ();  // delete list and release memory
+    Node<T>* getRoot();      // get the head pointer
     void add(T);             // add item at the last
     void insertFirst(T);     // add item at the beginning
     void remove(T);          // remove first occurrence of item
@@ -61,6 +62,11 @@ LinkedList<T>::LinkedList(T value) {
 
 template <class T>
 LinkedList<T>::~LinkedList() {
+}
+
+template <class T>
+Node<T>* LinkedList<T>::getRoot() {
+    return root;
 }
 
 template <class T>
@@ -93,8 +99,7 @@ void LinkedList<T>::remove(T value) {
     }
     Node<T> * currentNode = root;
     Node<T> * previousNode = NULL;
-    while (currentNode->getValue() != value
-            && currentNode->getNext() != NULL) {
+    while (currentNode->getValue() != value && currentNode->getNext() != NULL) {
         previousNode = currentNode;
         currentNode = currentNode->getNext();
     }
