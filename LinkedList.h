@@ -20,10 +20,10 @@ public:
     void setValue(T value) {
         this-> value = value;
     }
-    Node<T> * getNext() {
+    Node<T> * getNext() const {
         return next;
     }
-    T getValue() {
+    T getValue() const {
         return value;
     }
 

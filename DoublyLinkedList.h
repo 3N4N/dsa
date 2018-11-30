@@ -24,13 +24,13 @@ public:
     void setNext(Node<T> * next) {
         this->next = next;
     }
-    T getValue() {
+    T getValue() const {
         return value;
     }
-    Node<T> * getPrev() {
+    Node<T> * getPrev() const {
         return prev;
     }
-    Node<T> * getNext() {
+    Node<T> * getNext() const {
         return next;
     }
 
