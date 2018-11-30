@@ -4,7 +4,6 @@
 
 #include <iostream>
 
-#define NULL_VALUE -99999
 
 template <class T>
 class ArrayList
@@ -69,7 +68,7 @@ void ArrayList<T>::expand() {
     capacity *= 2;
     int len = size();
 
-    int * tmpList = new int[ capacity ];
+    T * tmpList = new T[ capacity ];
     for (int i=0; i<len; ++i) {
         tmpList[i] = arr[i];
     }
@@ -86,7 +85,7 @@ void ArrayList<T>::shrink() {
     capacity /= 2;
     int len = size();
 
-    int * tmpList = new int[ capacity ];
+    T * tmpList = new T[ capacity ];
     for (int i=0; i<len; ++i) {
         tmpList[i] = arr[i];
     }
@@ -181,8 +180,6 @@ int ArrayList<T>::rsearch(T value) {
 
 template <class T>
 T ArrayList<T>::at(int pos) {
-    if ( pos < 0 || pos >= size() )
-        return NULL_VALUE;
     return arr[pos];
 }
 

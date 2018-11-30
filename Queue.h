@@ -5,7 +5,6 @@
 #include <iostream>
 #include <cmath>
 
-#define NULL_VALUE -99999
 
 template <class T>
 class Queue
@@ -67,13 +66,11 @@ void Queue<T>::dequeue() {
 
 template <class T>
 T Queue<T>::first() {
-    if (size() <= 0) return NULL_VALUE;
     return arr[head];
 }
 
 template <class T>
 T Queue<T>::last() {
-    if (size() <= 0) return NULL_VALUE;
     return arr[tail];
 }
 
