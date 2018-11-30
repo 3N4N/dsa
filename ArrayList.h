@@ -10,20 +10,21 @@ template <class T>
 class ArrayList
 {
 public:
-    ArrayList ();           // default constructor with capacity 2
-    ArrayList (int);        // create arraylist with given capacity
-    virtual ~ArrayList ();  // delete arraylist and release memory
-    int size();             // return current size
-    void add(T);            // insert item at the end
-    void insertAt(int, T);  // insert item at given position
-    void remove(T);         // remove first occurrence of given item
-    void removeAllOf(T);    // remove all occurrence of given item
-    void removeAt(int);     // remove item at given position
-    int search(T);          // return index of first occurrence of given item
-    int rsearch(T);         // backward search
-    T at(int);              // return item at given position
-    void clear();           // remove all items
-    void printArray();      // print the items in the arraylist
+    ArrayList ();                    // default constructor with capacity 2
+    ArrayList (int capacity);        // create arraylist with given capacity
+    virtual ~ArrayList ();           // delete arraylist and release memory
+    int size();                      // return current size
+    void add(T value);               // insert item at the end
+    void insertAt(int pos, T value); // insert item at given position
+    void remove(T value);            // remove first occurrence of given item
+    void removeAllOf(T value);       // remove all occurrence of given item
+    void removeAt(int pos);          // remove item at given position
+    int search(T value);             // return index of first occurrence of given item
+    int rsearch(T value);            // backward search
+    T at(int pos);                   // return item at given position
+    void assign(int pos, T value);   // change value at position pos
+    void clear();                    // remove all items
+    void printArray();               // print the items in the arraylist
 
 private:
     void expand();
@@ -183,6 +184,11 @@ T ArrayList<T>::at(int pos) {
     if ( pos < 0 || pos >= size() )
         return NULL_VALUE;
     return arr[pos];
+}
+
+template <class T>
+void ArrayList<T>::assign(int pos, T value) {
+    arr[pos] = value;
 }
 
 template <class T>
