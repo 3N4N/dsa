@@ -50,7 +50,9 @@ ArrayList<T>::ArrayList(int capacity) {
 
 template <class T>
 ArrayList<T>::~ArrayList () {
-    delete(arr);
+    if (arr) delete[] arr;
+    length = 0;
+    arr = NULL;
 }
 
 template <class T>
@@ -71,7 +73,7 @@ void ArrayList<T>::expand() {
         tmpList[i] = arr[i];
     }
 
-    delete(arr);
+    if(arr) delete[] arr;
     arr = tmpList;
 }
 
@@ -88,7 +90,7 @@ void ArrayList<T>::shrink() {
         tmpList[i] = arr[i];
     }
 
-    delete(arr);
+    if (arr) delete[] arr;
     arr = tmpList;
 }
 

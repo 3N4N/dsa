@@ -71,7 +71,23 @@ DoublyLinkedList<T>::DoublyLinkedList (T value) {
 }
 
 template <class T>
-DoublyLinkedList<T>::~DoublyLinkedList() { }
+DoublyLinkedList<T>::~DoublyLinkedList() {
+    if(head == tail) {
+        if(head) delete head;
+        head = tail = NULL;
+    }
+    else {
+        Node<T> *currentNode = head;
+        head = head->getNext();
+        while(head!=tail) {
+            if(currentNode) delete currentNode;
+            currentNode = head;
+            head = head->getNext();
+        }
+        if(head) delete head;
+        head = tail = NULL;
+    }
+}
 
 template <class T>
 void DoublyLinkedList<T>::add(T value) {
@@ -105,9 +121,13 @@ void DoublyLinkedList<T>::remove(T value) {
     if (head==NULL && tail==NULL) return ;
     if (head->getValue() == value) {
         if (head==tail) {
+            if(head) delete head;
             head = tail = NULL;
         } else {
+            Node<T> *tmp = head;
             head = head->getNext();
+            if(tmp) delete tmp;
+            tmp = NULL;
             head->setPrev(NULL);
         }
         return ;
@@ -118,7 +138,10 @@ void DoublyLinkedList<T>::remove(T value) {
         currentNode = currentNode->getNext();
     if (currentNode->getValue() == value) {
         if (currentNode == tail) {
+            Node<T> *tmp = tail;
             tail = tail->getPrev();
+            if (tmp) delete tmp;
+            tmp = NULL;
             tail->setNext(NULL);
         } else {
             currentNode->getPrev()->setNext(currentNode->getNext());
@@ -133,11 +156,15 @@ void DoublyLinkedList<T>::removeAllOf(T value) {
 
     while (head->getValue() == value) {
         if (head==tail) {
+            if(head) delete head;
             head = tail = NULL;
             return ;
         }
         else {
+            Node<T> *tmp = head;
             head = head->getNext();
+            if(tmp) delete tmp;
+            tmp = NULL;
             head->setPrev(NULL);
         }
     }
@@ -146,7 +173,10 @@ void DoublyLinkedList<T>::removeAllOf(T value) {
         currentNode = currentNode->getNext();
         if (currentNode->getValue() == value) {
             currentNode->getPrev()->setNext(currentNode->getNext());
+            Node<T> *tmp = currentNode;
             currentNode = currentNode->getPrev();
+            if(tmp) delete tmp;
+            tmp = NULL;
             if (currentNode->getNext() != NULL)
                 currentNode->getNext()->setPrev(currentNode);
             else tail=currentNode;

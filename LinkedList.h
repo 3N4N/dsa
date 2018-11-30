@@ -62,6 +62,17 @@ LinkedList<T>::LinkedList(T value) {
 
 template <class T>
 LinkedList<T>::~LinkedList() {
+    if(root != NULL) {
+        Node<T> *currentNode = NULL;
+        while(root!=NULL) {
+            currentNode = root;
+            root = root->getNext();
+            if(currentNode) delete currentNode;
+            currentNode = NULL;
+        }
+        if(root) delete root;
+        root == NULL;
+    }
 }
 
 template <class T>
@@ -94,7 +105,10 @@ template <class T>
 void LinkedList<T>::remove(T value) {
     if (root==NULL) return ;
     if (root->getValue() == value) {
+        Node<T> * tmp = root;
         root = root->getNext();
+        if (tmp) delete tmp;
+        tmp = NULL;
         return ;
     }
     Node<T> * currentNode = root;
@@ -105,8 +119,11 @@ void LinkedList<T>::remove(T value) {
     }
 
     if (currentNode->getValue() == value) {
+        Node<T> * tmp = currentNode;
         currentNode = currentNode->getNext();
         previousNode->setNext(currentNode);
+        if(tmp) delete tmp;
+        tmp = NULL;
     }
 }
 
@@ -118,9 +135,13 @@ void LinkedList<T>::removeAllOf(T value) {
         return ;
     }
     // Remove all the nodes with matching value from the beginning
-    while (root->getValue() == value) {
+    while (root!=NULL && root->getValue() == value) {
+        Node<T> *tmp = root;
         root = root->getNext();
+        if(tmp) delete tmp;
+        tmp = NULL;
     }
+    if(root==NULL) return;
 
     Node<T> * currentNode = root;
     Node<T> * previousNode = NULL;
@@ -131,8 +152,11 @@ void LinkedList<T>::removeAllOf(T value) {
         currentNode = currentNode->getNext();
 
         if (currentNode->getValue()==value) {
+            Node<T> *tmp = currentNode;
             previousNode->setNext(currentNode->getNext());
             currentNode = previousNode;
+            if(tmp) delete tmp;
+            tmp = NULL;
         }
     }
 }
