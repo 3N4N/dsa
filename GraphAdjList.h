@@ -115,12 +115,10 @@ void Graph::addEdge(int u, int v, int w) {
     if (!isEdge(u, v)) {
         arr[u].add(*tmp);
     }
-    if(tmp) delete tmp;
     tmp = NULL;
     if (!isDirected && !isEdge(v, u)) {
         tmp = new Vertex(u, w);
         arr[v].add(*tmp);
-        if(tmp) delete tmp;
         tmp = NULL;
     }
 }
