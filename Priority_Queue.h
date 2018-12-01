@@ -11,9 +11,11 @@ class MinHeap {
 private:
     ArrayList<T> heap;
     ArrayList<int> priority;
-    int left(int parent);                     // return index of left child
-    int right(int parent);                    // return index of right child
-    int parent(int child);                    // return index of parent
+    ArrayList<T> getHeap() const { return heap; }
+    ArrayList<int> getPriority() const { return priority; }
+    int left(int parent) const ;            // return index of left child
+    int right(int parent) const ;           // return index of right child
+    int parent(int child) const ;           // return index of parent
     void increaseKey(int i, int v);
     void decreaseKey(int i, int v);
 
@@ -22,33 +24,34 @@ public:
     void insert(T element, int p);           // insert element into heap
     void deleteMin();                        // delete minimum element
     T extractMin();                          // extract minimum element
-    int size();                              // return heap size
+    int size() const;                        // return heap size
     void sift_down(int index);               // maintain heap structure
     void sift_up(int index);                 // maintain heap structure
     void buildHeap();
     void updateKey(int i, int v);
-    void displayHeap();
+    template<class P>
+        friend std::ostream& operator<<(std::ostream& os, const MinHeap<P>& obj);
 };
 
 template<class T>
-int MinHeap<T>::size() {
+int MinHeap<T>::size() const {
     return heap.size();
 }
 
 template<class T>
-int MinHeap<T>::left(int parent) {
+int MinHeap<T>::left(int parent) const {
     int l = 2 * parent + 1;
     return l;
 }
 
 template<class T>
-int MinHeap<T>::right(int parent) {
+int MinHeap<T>::right(int parent) const {
     int r = 2 * parent + 2;
     return r;
 }
 
 template<class T>
-int MinHeap<T>::parent(int child) {
+int MinHeap<T>::parent(int child) const {
     int p = (child - 1)/2;
     return p;
 }
@@ -137,11 +140,11 @@ void MinHeap<T>::buildHeap() {
     }
 }
 
-template<class T>
-void MinHeap<T>::displayHeap() {
-    heap.printArray();
-    std::cout << "\n";
-    priority.printArray();
+template<class P>
+std::ostream& operator<<(std::ostream& os, const MinHeap<P>& obj) {
+    os << obj.getHeap();
+    os << obj.getPriority();
+    return os;
 }
 
 
@@ -152,13 +155,16 @@ template<class T>
 class Priority_Queue {
 private:
     MinHeap<T> heap;
+    MinHeap<T> getHeap() const { return heap; }
+
 public:
     Priority_Queue() { }
     void insert(T item, int priority);
     T extract_min();
-    int size() { return heap.size(); }
-    bool isEmpty() { return (size() == 0); }
-    void display() { heap.displayHeap(); }
+    int size() const { return heap.size(); }
+    bool isEmpty() const { return (size() == 0); }
+    template<class P>
+        friend std::ostream& operator<<(std::ostream& os, const Priority_Queue<P>& obj);
 };
 
 template<class T>
@@ -172,6 +178,12 @@ T Priority_Queue<T>::extract_min() {
     T tmp = heap.extractMin();
     heap.deleteMin();
     return tmp;
+}
+
+template<class P>
+std::ostream& operator<<(std::ostream& os, const Priority_Queue<P>& obj) {
+    os << obj.getHeap();
+    return os;
 }
 
 #endif          // PRIORITY_QUEUE_H

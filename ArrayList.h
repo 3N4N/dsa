@@ -12,18 +12,19 @@ public:
     ArrayList ();                    // default constructor with capacity 2
     ArrayList (int capacity);        // create arraylist with given capacity
     virtual ~ArrayList ();           // delete arraylist and release memory
-    int size();                      // return current size
+    int size() const;                // return current size
     void add(T value);               // insert item at the end
     void insertAt(int pos, T value); // insert item at given position
     void remove(T value);            // remove first occurrence of given item
     void removeAllOf(T value);       // remove all occurrence of given item
     void removeAt(int pos);          // remove item at given position
-    int search(T value);             // return index of first occurrence of given item
-    int rsearch(T value);            // backward search
-    T at(int pos);                   // return item at given position
+    int search(T value) const;       // return index of first occurrence of given item
+    int rsearch(T value) const;      // backward search
+    T at(int pos) const;             // return item at given position
     void assign(int pos, T value);   // change value at position pos
     void clear();                    // remove all items
-    void printArray();               // print the items in the arraylist
+    template<class P>
+        friend std::ostream& operator<<(std::ostream& os, const ArrayList<P>& obj);
 
 private:
     void expand();
@@ -56,7 +57,7 @@ ArrayList<T>::~ArrayList () {
 }
 
 template <class T>
-int ArrayList<T>::size() {
+int ArrayList<T>::size() const {
     return length;
 }
 
@@ -161,7 +162,7 @@ void ArrayList<T>::removeAt(int pos) {
 }
 
 template <class T>
-int ArrayList<T>::search(T value) {
+int ArrayList<T>::search(T value) const {
     int len = size();
     for (int i=0; i<len; ++i) {
         if (arr[i] == value) return i;
@@ -170,7 +171,7 @@ int ArrayList<T>::search(T value) {
 }
 
 template <class T>
-int ArrayList<T>::rsearch(T value) {
+int ArrayList<T>::rsearch(T value) const {
     int len = size();
     for (int i=len-1; i>=0; --i) {
         if (arr[i] == value) return i;
@@ -179,7 +180,7 @@ int ArrayList<T>::rsearch(T value) {
 }
 
 template <class T>
-T ArrayList<T>::at(int pos) {
+T ArrayList<T>::at(int pos) const {
     return arr[pos];
 }
 
@@ -194,17 +195,20 @@ void ArrayList<T>::clear() {
     shrink();
 }
 
-template <class T>
-void ArrayList<T>::printArray() {
-    int len = size();
+template<class P>
+std::ostream& operator<<(std::ostream& os, const ArrayList<P>& obj) {
+    int len = obj.size();
     if (len==0) {
-        std::cout << "Arraylist is empty" << std::endl;
-        return ;
+        os << "Arraylist is empty" << std::endl;
+        return os;
     }
     for (int i=0; i<len-1; ++i) {
-        std::cout << arr[i] << " ";
+        os << obj.at(i) << " ";
     }
-    std::cout << arr[len-1] << std::endl;
+    os << obj.at(len-1) << "\n";
+    return os;
 }
+
+
 
 #endif          // ARRAY_LIST_H

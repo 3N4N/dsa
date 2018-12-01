@@ -36,17 +36,18 @@ template <class T>
 class LinkedList
 {
 public:
-    LinkedList ();                          // create a linked list
-    virtual ~LinkedList ();                 // delete list and release memory
-    Node<T>* getRoot() { return root; }     // get the head pointer
-    int size() { return len; }              // return size of the list
-    void add(T value);                      // add item at the last
-    void add(LinkedList list);              // add a linked list
-    void insertFirst(T value);              // add item at the beginning
-    void remove(T value);                   // remove first occurrence of item
-    void removeAllOf(T value);              // remove all occurrence of item
-    void clear();                           // remove all elements
-    void printList();                       // print the items of the list
+    LinkedList ();                             // create a linked list
+    virtual ~LinkedList ();                    // delete list and release memory
+    Node<T>* getRoot() const { return root; }  // get the head pointer
+    int size() const { return len; }           // return size of the list
+    void add(T value);                         // add item at the last
+    void add(LinkedList list);                 // add a linked list
+    void insertFirst(T value);                 // add item at the beginning
+    void remove(T value);                      // remove first occurrence of item
+    void removeAllOf(T value);                 // remove all occurrence of item
+    void clear();                              // remove all elements
+    template<class P>
+        friend std::ostream& operator<<(std::ostream& os, const LinkedList<P>& obj);
 
 private:
     Node<T> * root;
@@ -188,19 +189,21 @@ void LinkedList<T>::clear() {
     }
 }
 
-template <class T>
-void LinkedList<T>::printList() {
+template<class P>
+std::ostream& operator<<(std::ostream& os, const LinkedList<P>& obj) {
+    Node<P> *root = obj.getRoot();
     if (root==NULL) {
-        std::cout << "List is empty" << std::endl;
-        return ;
+        os << "List is empty" << "\n";
+        return os;
     }
-    Node<T> * currentNode = root;
-    std::cout << currentNode->getValue() << " ";
+    Node<P> * currentNode = root;
+    os << currentNode->getValue() << " ";
     while (currentNode->getNext() != NULL) {
         currentNode = currentNode->getNext();
-        std::cout << currentNode->getValue() << " ";
+        os << currentNode->getValue() << " ";
     }
-    std::cout << std::endl;
+    os << "\n";
+    return os;
 }
 
 #endif          // LINKEDLIST_H

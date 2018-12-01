@@ -14,9 +14,9 @@ public:
     ~Queue();
     void enqueue(T);  // push item at the last
     void dequeue();   // pop item from the beginning
-    T first();        // return item at the beginning
-    T last();         // return item at the end
-    int size();       // return the size
+    T first() const;  // return item at the beginning
+    T last() const;   // return item at the end
+    int size() const; // return the size
 
 private:
     T * arr;
@@ -65,17 +65,17 @@ void Queue<T>::dequeue() {
 }
 
 template <class T>
-T Queue<T>::first() {
+T Queue<T>::first() const {
     return arr[head];
 }
 
 template <class T>
-T Queue<T>::last() {
+T Queue<T>::last() const {
     return arr[tail];
 }
 
 template <class T>
-int Queue<T>::size() {
+int Queue<T>::size() const {
     return length;
 }
 
