@@ -36,28 +36,27 @@ template <class T>
 class LinkedList
 {
 public:
-    LinkedList ();           // create a singly linked list
-    LinkedList (T);          // create a singly linked list and add item
-    virtual ~LinkedList ();  // delete list and release memory
-    Node<T>* getRoot();      // get the head pointer
-    void add(T);             // add item at the last
-    void insertFirst(T);     // add item at the beginning
-    void remove(T);          // remove first occurrence of item
-    void removeAllOf(T);     // remove all occurrence of item
-    void printList();        // print the items of the list
+    LinkedList ();                          // create a linked list
+    virtual ~LinkedList ();                 // delete list and release memory
+    Node<T>* getRoot() { return root; }     // get the head pointer
+    int size() { return len; }              // return size of the list
+    void add(T value);                      // add item at the last
+    void add(LinkedList list);              // add a linked list
+    void insertFirst(T value);              // add item at the beginning
+    void remove(T value);                   // remove first occurrence of item
+    void removeAllOf(T value);              // remove all occurrence of item
+    void clear();                           // remove all elements
+    void printList();                       // print the items of the list
 
 private:
     Node<T> * root;
+    int len;
 };
 
 template <class T>
 LinkedList<T>::LinkedList() {
     root = NULL;
-}
-
-template <class T>
-LinkedList<T>::LinkedList(T value) {
-    root = new Node<T>(value);
+    len = 0;
 }
 
 template <class T>
@@ -73,11 +72,7 @@ LinkedList<T>::~LinkedList() {
         if(root) delete root;
         root == NULL;
     }
-}
-
-template <class T>
-Node<T>* LinkedList<T>::getRoot() {
-    return root;
+    len = 0;
 }
 
 template <class T>
@@ -85,6 +80,7 @@ void LinkedList<T>::add(T value) {
     Node<T> * tmpNode = new Node<T>(value);
     if (root==NULL) {
         root = tmpNode;
+        len++;
         return ;
     }
 
@@ -92,6 +88,19 @@ void LinkedList<T>::add(T value) {
     while (currentNode->getNext() != NULL)
         currentNode = currentNode->getNext();
     currentNode->setNext(tmpNode);
+
+    len++;
+}
+
+template <class T>
+void LinkedList<T>::add(LinkedList list) {
+    Node<T> *listRoot = list.getRoot();
+    Node<T> *currentNode = root;
+    while(currentNode->getNext()!=NULL)
+        currentNode = currentNode->getNext();
+    currentNode->setNext(listRoot);
+
+    len += list.size();
 }
 
 template <class T>
@@ -99,6 +108,8 @@ void LinkedList<T>::insertFirst(T value) {
     Node<T> * tmpNode = new Node<T>(value);
     tmpNode->setNext(root);
     root = tmpNode;
+
+    len++;
 }
 
 template <class T>
@@ -109,6 +120,7 @@ void LinkedList<T>::remove(T value) {
         root = root->getNext();
         if (tmp) delete tmp;
         tmp = NULL;
+        len--;
         return ;
     }
     Node<T> * currentNode = root;
@@ -124,6 +136,7 @@ void LinkedList<T>::remove(T value) {
         previousNode->setNext(currentNode);
         if(tmp) delete tmp;
         tmp = NULL;
+        len--;
     }
 }
 
@@ -138,6 +151,7 @@ void LinkedList<T>::removeAllOf(T value) {
     while (root!=NULL && root->getValue() == value) {
         Node<T> *tmp = root;
         root = root->getNext();
+        len--;
         if(tmp) delete tmp;
         tmp = NULL;
     }
@@ -157,7 +171,20 @@ void LinkedList<T>::removeAllOf(T value) {
             currentNode = previousNode;
             if(tmp) delete tmp;
             tmp = NULL;
+            len--;
         }
+    }
+}
+
+template <class T>
+void LinkedList<T>::clear() {
+    Node<T> *currentNode = NULL;
+    while (root != NULL) {
+        currentNode = root;
+        root = root->getNext();
+        if(currentNode) delete currentNode;
+        currentNode = NULL;
+        len--;
     }
 }
 
